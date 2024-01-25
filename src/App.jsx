@@ -61,15 +61,26 @@ const xAxis = new THREE.Vector3(1, 0, 0)
 const yAxis = new THREE.Vector3(0, 1, 0)
 
 async function fetchManifest(location) {
-  const response = await fetch(location)
-  const data = await response.json()
-  return data
+  // catch error to allow just compression to still work
+  try{
+    const response = await fetch(location)
+    const data = await response.json()
+    return data
+  }catch(e){
+    return {}
+  }
 }
 
 async function fetchPersonality() {
-  const response = await fetch(peresonalityImportPath)
-  const data = await response.json()
-  return data
+  // catch error to allow just compression to still work
+  try{
+    const response = await fetch(peresonalityImportPath)
+    const data = await response.json()
+    return data
+  }catch(e){
+    alert("Manifest.json not found. Please check your character asset path. refer to README.md for more information.")
+    return {}
+  }
 }
 
 async function fetchAll() {
